@@ -6,18 +6,18 @@ import java.awt.*;
 public class Circle {
 
     //variables
-    private double x;
-    private double y;
+    private double x, y, timing, hitsound;
     private boolean hit;
     private Image image;
-    private double timing;
 
-    Circle(double x, double y, double timing){
+    Circle(double pX, double pY, double pTiming, double pHitsound){
 
-        this.x = x;
-        this.y = y;
+        this.x = pX;
+        this.y = pY;
+        this.timing = pTiming;
+        this.hitsound = pHitsound;
+
         this.hit = false;
-        this.timing = timing;
 
         //get and set Image
         var ii = new ImageIcon("skin/hitcircle.png");

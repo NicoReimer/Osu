@@ -51,6 +51,8 @@ public class OsuClient extends JFrame {
                 new ImageIcon(path_skin + "/cursor.png").getImage(),
                 new Point(0,0),"custom cursor"));
 
+        //Todo: rework cursor function
+
         //Buttons
         btnPlay.addActionListener(new ActionListener() {
             @Override
@@ -70,21 +72,23 @@ public class OsuClient extends JFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
 
+                //select Beatmap
                 String selectedValue = (String) ltBeatmaps.getSelectedValue();
-
-                //playSound(getSongsPath() + selectedValue);
 
                 System.out.println(getSongsPath() + selectedValue);
 
                 pnlLayout.show(pnlMain,"cardPlayField");
 
+                //create Beatmap
+                Beatmap playBeatmap = new Beatmap(getSongsPath()+ '/' +  selectedValue,"/play.csv");
 
-                for(int i = 0; i < 10; i++) {
-                    new Circle(100, 100, 1);
-                    System.out.println("Spawned Circle");
-                }
+                //Test Start Song
+                //playSound(getSongsPath()+ '/' +  selectedValue + "/song.wav");
 
                 //Todo: create Beatmap Objekt from this
+                //playBeatmap.Start();
+
+
             }
         });
     }
@@ -95,11 +99,11 @@ public class OsuClient extends JFrame {
         //Creating a File object for directory
         File directoryPath = new File(getSongsPath());
         //List of all files and directories
-        String contents[] = directoryPath.list();
+        String[] contents = directoryPath.list();
 
-        for ( int i = 0; i < contents.length; i++ ){
-            System.out.println(contents[i]);
-            model.addElement( contents[i]);
+        for (String content : contents) {
+            System.out.println(content);
+            model.addElement(content);
         }
 
         ltBeatmaps.setModel(model);
