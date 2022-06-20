@@ -4,18 +4,35 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.File;
+import java.util.ArrayList;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class OsuClient extends JFrame {
     private JPanel pnlMain;
+    private JPanel pnlMenu;
+    private JButton btnQuit;
+    private JButton btnPlay;
+    private JLabel lblOsu;
+    private JPanel pnlBeatmaps;
+    private JList ltBeatmaps;
+    private JPanel pnlGameField;
+    private static String path_songs = "res\\songs";
+
+    static String path_skin = "res\\skin";
 
     public OsuClient() {
         //ImageIcon icon = new ImageIcon("src/Chatogram/Client/img/ChatogramIcon.png");
         //this.setIconImage(icon.getImage());
-        playSound("sounds/background.wav");
+        //playSound("sounds/background.wav");
+
+        //Init Menu
         this.setContentPane(this.pnlMain);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
@@ -26,6 +43,66 @@ public class OsuClient extends JFrame {
         this.dispose();
         this.setUndecorated(true);
         this.setVisible(true);
+
+        CardLayout pnlLayout = (CardLayout) pnlMain.getLayout();
+
+        //Set Cursor
+        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+                new ImageIcon(path_skin + "/cursor.png").getImage(),
+                new Point(0,0),"custom cursor"));
+
+        //Buttons
+        btnPlay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pnlLayout.show(pnlMain,"cardBeatmaps");
+                loadBeatmaps();
+            }
+        });
+        btnQuit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        ltBeatmaps.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+
+                String selectedValue = (String) ltBeatmaps.getSelectedValue();
+
+                //playSound(getSongsPath() + selectedValue);
+
+                System.out.println(getSongsPath() + selectedValue);
+
+                pnlLayout.show(pnlMain,"cardPlayField");
+
+
+                for(int i = 0; i < 10; i++) {
+                    new Circle(100, 100, 1);
+                    System.out.println("Spawned Circle");
+                }
+
+                //Todo: create Beatmap Objekt from this
+            }
+        });
+    }
+
+    public void loadBeatmaps(){
+        DefaultListModel<String> model = new DefaultListModel<>();
+
+        //Creating a File object for directory
+        File directoryPath = new File(getSongsPath());
+        //List of all files and directories
+        String contents[] = directoryPath.list();
+
+        for ( int i = 0; i < contents.length; i++ ){
+            System.out.println(contents[i]);
+            model.addElement( contents[i]);
+        }
+
+        ltBeatmaps.setModel(model);
     }
 
     //plays sound files only wav
@@ -50,5 +127,14 @@ public class OsuClient extends JFrame {
         catch(Exception ex){
             ex.printStackTrace();
         }
+    }
+
+    public static String getSongsPath()
+    {
+        return path_songs;
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }
