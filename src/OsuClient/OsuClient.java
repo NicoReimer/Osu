@@ -72,6 +72,9 @@ public class OsuClient extends JFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
 
+                //Todo: make this only trigger one time
+
+
                 //select Beatmap
                 String selectedValue = (String) ltBeatmaps.getSelectedValue();
 
