@@ -12,6 +12,7 @@ public class Circle {
     private boolean hit;
     private Image image;
 
+    //constructor
     Circle(double pX, double pY, double pTiming, double pHitsound){
 
         this.x = pX;
@@ -27,7 +28,6 @@ public class Circle {
     }
 
     //methods
-
     public double getTiming(){
         return this.timing;
     }

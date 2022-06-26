@@ -18,18 +18,16 @@ import javax.swing.event.ListSelectionListener;
 public class OsuClient extends JFrame {
     private JPanel pnlMain;
     private JPanel pnlMenu;
+    private JPanel pnlGameField;
     private JButton btnQuit;
     private JButton btnPlay;
     private JLabel lblOsu;
     private JPanel pnlBeatmaps;
     private JList ltBeatmaps;
-    private JPanel pnlGameField;
     private Timer timer;
     private Beatmap currentBeatmap;
-
     private CardLayout pnlLayout;
     private static String path_songs = "res\\songs";
-
     static String path_skin = "res\\skin";
 
     public OsuClient() {
@@ -66,15 +64,13 @@ public class OsuClient extends JFrame {
                 loadBeatmaps();
             }
         });
+
         btnQuit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-
-
-
 
         ltBeatmaps.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -172,7 +168,7 @@ public class OsuClient extends JFrame {
     }
 
     private class GameCycle implements ActionListener {
-        //Gets called by Timer every 10ms
+        //Gets called by Timer every 1ms
         @Override
         public void actionPerformed(ActionEvent e) {
             doGameCycle();
@@ -183,9 +179,5 @@ public class OsuClient extends JFrame {
         //Start Game Cycle
         timer = new Timer(1, new GameCycle());
         timer.start();
-    }
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
     }
 }
