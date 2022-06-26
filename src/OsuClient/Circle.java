@@ -3,6 +3,8 @@ package OsuClient;
 import javax.swing.*;
 import java.awt.*;
 
+import static OsuClient.OsuClient.path_skin;
+
 public class Circle {
 
     //variables
@@ -20,7 +22,7 @@ public class Circle {
         this.hit = false;
 
         //get and set Image
-        var ii = new ImageIcon("skin/hitcircle.png");
+        var ii = new ImageIcon(path_skin + "/hitcircle.png");
         this.image = ii.getImage();
     }
 
