@@ -4,10 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.io.File;
-import java.util.ArrayList;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -87,7 +84,8 @@ public class OsuClient extends JFrame {
 
                     //create Beatmap
                     currentBeatmap = new Beatmap(getSongsPath() + '/' + selectedValue, "/play.csv");
-                    //Test Start Song
+
+                    //start test song
                     playSound(getSongsPath()+ '/' +  selectedValue + "/song.wav");
 
                     startGameTick();
@@ -159,12 +157,16 @@ public class OsuClient extends JFrame {
     private void doGameCycle() {
         //spawnBallons();
         //updateBallons();
-
         Image test = currentBeatmap._hitobjects[0].getImage();
-        pnlGameField.imageUpdate(currentBeatmap._hitobjects[0].getImage(),0,(int)currentBeatmap._hitobjects[0].getPosX(),(int)currentBeatmap._hitobjects[0].getPosY(),50,50);
-       // doDrawing(getGraphics());
-        pnlGameField.repaint();
-        //resetInput();
+
+        boolean test2 = false;
+
+        if(!test2) {
+            pnlGameField.getGraphics().drawImage(test, (int) currentBeatmap._hitobjects[0].getPosX(), (int) currentBeatmap._hitobjects[0].getPosY(), this);
+            test2 = true;
+            pnlGameField.repaint();
+        }
+
     }
 
     private class GameCycle implements ActionListener {

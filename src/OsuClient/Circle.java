@@ -8,12 +8,13 @@ import static OsuClient.OsuClient.path_skin;
 public class Circle {
 
     //variables
-    private double x, y, timing, hitsound;
+    private int x, y, hitsound;
+    private double timing;
     private boolean hit;
     private Image image;
 
     //constructor
-    Circle(double pX, double pY, double pTiming, double pHitsound){
+    Circle(int pX, int pY, double pTiming, int pHitsound){
 
         this.x = pX;
         this.y = pY;
@@ -40,7 +41,7 @@ public class Circle {
         return this.x;
     }
 
-    public void setPosX(float p_x){
+    public void setPosX(int p_x){
         this.x = p_x;
     }
 
@@ -48,7 +49,7 @@ public class Circle {
         return this.y;
     }
 
-    public void setPosY(float p_y){
+    public void setPosY(int p_y){
         this.y = p_y;
     }
 
