@@ -28,6 +28,9 @@ public class GameField extends JPanel {
     private Point mousePosition;
     private boolean buttonOne;
     private boolean buttonTwo;
+    private Image[] numberImages;
+
+    private int combo;
 
     public void startGame(Beatmap beatmap, String mapName){
 
@@ -37,6 +40,12 @@ public class GameField extends JPanel {
             this.hitCircleOverlayImage = ImageIO.read(new File(path_skin + "/hitcircleoverlay.png"));
             this.cursorImage = ImageIO.read(new File(path_skin + "/cursor.png"));
             this.hitCircleImage = ImageIO.read(new File(path_skin + "/hitcircle.png"));
+            this.numberImages = new Image[11];
+
+            for (int i = 0; i < 11; i++){
+                this.numberImages[i] = ImageIO.read(new File(path_skin + "/numbers-" + i + ".png"));
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -45,6 +54,7 @@ public class GameField extends JPanel {
 
         addKeyBinding(this, KeyEvent.VK_D, "2Button", (evt)-> buttonTwo = true);
 
+        combo = 0;
         timeCounter = 180;
         drawObject = new ArrayList();
         lastGameObject = 0;
@@ -92,9 +102,9 @@ public class GameField extends JPanel {
             lastGameObject++;
         }
 
-        for (Object o : drawObject) {
+        for (int i = 0; i < drawObject.size(); i++) {
 
-            Circle circle = (Circle) o;
+            Circle circle = (Circle)drawObject.get(i);
 
             if (circle.getHit())
                 return;
@@ -148,12 +158,46 @@ public class GameField extends JPanel {
 
             Circle circle = (Circle)drawObject.get(i);
 
-            if(timeCounter - circle.getTiming() > 300 || circle.getHit()) {
+            if(circle.getHit()) {
+                drawObject.remove(i);
+                combo++;
+            }
+            else if(timeCounter - circle.getTiming() > 300)
+            {
+                if(combo > 5)
+                 OsuClient.playSound(path_skin + "/combobreak.wav");
+
+                combo = 0;
                 drawObject.remove(i);
             }
         }
 
         if(mousePosition == null) return;
+
+
+        //Todo: simplify Combo Draw
+        if(combo < 10) {
+            g.drawImage(numberImages[combo], 120, 975, this);
+            g.drawImage(numberImages[10], 160, 975, this);
+        }
+        else if(combo > 9 && combo < 99){
+            g.drawImage(numberImages[combo / 10], 120, 975, this);
+            g.drawImage(numberImages[combo % 10], 160, 975, this);
+            g.drawImage(numberImages[10], 200, 975, this);
+        }
+        else if (combo == 100){
+            g.drawImage(numberImages[1], 120, 975, this);
+            g.drawImage(numberImages[0], 160, 975, this);
+            g.drawImage(numberImages[0], 200, 975, this);
+            g.drawImage(numberImages[10], 240, 975, this);
+        }
+        else if (combo > 100 && combo < 999){
+            g.drawImage(numberImages[combo / 100], 120, 975, this);
+            g.drawImage(numberImages[(combo / 10) % 10], 160, 975, this);
+            g.drawImage(numberImages[combo % 10], 200, 975, this);
+            g.drawImage(numberImages[10], 240, 975, this);
+        }
+
 
         g.drawImage(cursorImage, mousePosition.x - 128, mousePosition.y- 128,this);
     }
