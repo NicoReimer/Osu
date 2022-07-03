@@ -10,34 +10,47 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.*;
 
 import static OsuClient.OsuClient.getSongsPath;
 import static OsuClient.OsuClient.path_skin;
 
+class HitObjects {
+    private final Integer type;
+    private final Point position;
+    private Integer frame;
 
-//Ende Freezing
-//Timing Hitanzeige
-//Scoresystem != Combo
-//Random Bugs
-//Pause Menu
-//Settings
+    public HitObjects(int pType, Point pPosition, int pFrame) {
+        this.type = pType;
+        this.position = pPosition;
+        this.frame = pFrame;
+    }
 
-//Präsentation
-//Dokumentation
+    public int getType(){
+        return this.type;
+    }
 
+    public Integer getFrame(){
+        return this.frame;
+    }
+
+    public Point getPosition(){
+        return this.position;
+    }
+
+    public void setFrame(Integer pFrame){
+        this.frame = pFrame;
+    }
+
+}
 
 public class GameField extends JPanel {
 
     private Beatmap currentBeatmap;
     private double timeCounter;
     private int lastGameObject;
-    private LinkedList drawObject;
+    private LinkedList<Circle> drawObject;
     private Image  approachCircleImage;
     private Image  hitCircleOverlayImage;
     private Image  cursorImage;
@@ -48,7 +61,14 @@ public class GameField extends JPanel {
     private boolean buttonOne;
     private boolean buttonTwo;
     private Image[] numberImages;
+    private Image[] missImages;
+    private Image[] hundredImages;
+    private Image[] fiftyImages;
+    private Image pauseOverlayImage;
+    private Image pauseContinueImage;
+    private Image pauseBackImage;
     private ArrayList<Map.Entry<Clip, Double>> soundClips;
+    private LinkedList<HitObjects> hitObjects;
     private Clip musicClip;
     private int combo;
     private int score;
@@ -63,9 +83,6 @@ public class GameField extends JPanel {
     private boolean mousePressed;
     private boolean restart;
 
-    private ScheduledExecutorService executor;
-
-
 
     public void startGame(Beatmap beatmap, String mapName){
 
@@ -75,12 +92,31 @@ public class GameField extends JPanel {
             this.hitCircleOverlayImage = ImageIO.read(new File(path_skin + "/hitcircleoverlay.png"));
             this.cursorImage = ImageIO.read(new File(path_skin + "/cursor.png"));
             this.hitCircleImage = ImageIO.read(new File(path_skin + "/hitcircle.png"));
-            this.numberImages = new Image[11];
             this.scoreboardImage = ImageIO.read(new File(path_skin + "/scoreboard.png"));
             this.menuBackImage = ImageIO.read(new File(path_skin + "/menu-back.png"));
+            this.pauseOverlayImage = ImageIO.read(new File(path_skin + "/pause-overlay.png"));
+            this.pauseBackImage = ImageIO.read(new File(path_skin + "/pause-back.png"));
+            this.pauseContinueImage = ImageIO.read(new File(path_skin + "/pause-continue.png"));
+
+            this.numberImages = new Image[11];
+            this.missImages = new Image[46];
+            this.hundredImages = new Image[46];
+            this.fiftyImages = new Image[46];
 
             for (int i = 0; i < 11; i++){
                 this.numberImages[i] = ImageIO.read(new File(path_skin + "/numbers-" + i + ".png"));
+            }
+
+            for (int i = 0; i < 46; i++){
+                this.missImages[i] = ImageIO.read(new File(path_skin + "/hit0-" + i + "@2x.png"));
+            }
+
+            for (int i = 0; i < 46; i++){
+                this.hundredImages[i] = ImageIO.read(new File(path_skin + "/hit100-" + i + "@2x.png"));
+            }
+
+            for (int i = 0; i < 46; i++){
+                this.fiftyImages[i] = ImageIO.read(new File(path_skin + "/hit50-" + i + "@2x.png"));
             }
 
         } catch (IOException e) {
@@ -94,10 +130,8 @@ public class GameField extends JPanel {
 
         addKeyBinding(this, KeyEvent.VK_ESCAPE, "3Button", (evt)-> pauseGame());
 
-        //Adding Mouse Listner
+        //Adding Mouse Listener
         addMouseListener(new MouseAdapter() {
-            private Color background;
-
             @Override
             public void mousePressed(MouseEvent e) {
 
@@ -122,10 +156,11 @@ public class GameField extends JPanel {
         fiftyCount = 0;
         missCount = 0;
         maxCombo = 0;
-        drawObject = new LinkedList();
+        drawObject = new LinkedList<>();
         soundClips = new ArrayList<>();
         lastGameObject = 0;
         currentBeatmap = beatmap;
+        hitObjects = new LinkedList<>();
 
         //Start a timer
         long start = System.currentTimeMillis();
@@ -137,7 +172,7 @@ public class GameField extends JPanel {
         long end = System.currentTimeMillis();
 
         //Calculate the time to load the Song and use it as offset
-        timeCounter = end - start;
+        timeCounter = (end - start) + 60;
 
         //Start Game Cycle
         startGameTick();
@@ -170,9 +205,9 @@ public class GameField extends JPanel {
     }
 
     public void startGameTick(){
-        Runnable gameTick = () -> doGameCycle();
+        Runnable gameTick = this::doGameCycle;
 
-        executor = Executors.newScheduledThreadPool(1);
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         executor.scheduleAtFixedRate(gameTick, 0, 1, TimeUnit.MILLISECONDS);
     }
 
@@ -218,19 +253,23 @@ public class GameField extends JPanel {
         //Make 200ms hit window
         int difference = (int) (circle.getTiming() - timeCounter) + 200;
 
-        if(difference > -32 && difference < 32) {
+        if(difference > -44 && difference < 44) {
 
             threehundredCount++;
             return 300;
         }
-        else if(difference > -76 && difference < 76){
+        else if(difference > -92 && difference < 92){
 
             hundredCount++;
+            hitObjects.add(new HitObjects(1,new Point((int) circle.getPosX(), (int) circle.getPosY()),0));
+
             return 100;
         }
-        else if(difference > -120 && difference < 120){
+        else if(difference > -140 && difference < 140){
 
             fiftyCount++;
+            hitObjects.add(new HitObjects(2,new Point((int) circle.getPosX(), (int) circle.getPosY()),0));
+
             return 50;
         }
 
@@ -307,12 +346,12 @@ public class GameField extends JPanel {
         //HitSound and Set Circle Hit
         for (int i = 0; i < drawObject.size(); i++) {
 
-            Circle circle = (Circle)drawObject.get(i);
+            Circle circle = drawObject.get(i);
 
             if (circle.getHit())
                 return;
 
-            //Check if we hit the Ballon and reset Input
+            //Check if we hit the Circle and reset Input
             if ((int) circle.getPosX() + 240 > mousePosition.x && (int) circle.getPosX() < mousePosition.x && (int) circle.getPosY() + 240 > mousePosition.y && (int) circle.getPosY() < mousePosition.y) {
 
                 if (buttonOne || buttonTwo) {
@@ -337,7 +376,7 @@ public class GameField extends JPanel {
         //Remove, add Combo/Score and Miss Circle
         for(int i = 0; i < drawObject.size(); i++){
 
-            Circle circle = (Circle)drawObject.get(i);
+            Circle circle = drawObject.get(i);
 
             if(circle.getHit()) {
                 drawObject.remove(i);
@@ -345,7 +384,7 @@ public class GameField extends JPanel {
                 int getModifier = modifier(circle);
 
                 if(getModifier == 0) {
-                     processMiss();
+                     processMiss(circle);
                      return;
                 }
 
@@ -360,17 +399,21 @@ public class GameField extends JPanel {
             {
                 drawObject.remove(i);
 
-                processMiss();
+                processMiss(circle);
             }
         }
     }
 
-    public void processMiss(){
+    public void processMiss(Circle circle){
         if(combo > 5)
             playSound(path_skin + "/combobreak.wav");
 
         missCount++;
         combo = 0;
+
+        Point getPoint = new Point((int) circle.getPosX(), (int) circle.getPosY());
+
+        hitObjects.add(new HitObjects(0,getPoint,0));
     }
 
     public void drawCircles(Graphics g){
@@ -379,14 +422,14 @@ public class GameField extends JPanel {
         if (drawObject.size() > 0){
             for (int i = 0; i < drawObject.size(); i++) {
 
-                Circle circle = (Circle) drawObject.get(i);
+                Circle circle = drawObject.get(i);
 
-                int apporachCircleSize = (int) ((circle.getTiming() - timeCounter) * 0.8 + 150 + 240);
+                int approachCircleSize = (int) ((circle.getTiming() - timeCounter) * 0.8 + 150 + 240);
 
-                if (apporachCircleSize < 240)
-                    apporachCircleSize = 240;
+                if (approachCircleSize < 240)
+                    approachCircleSize = 240;
 
-                g.drawImage(approachCircleImage, (int) circle.getPosX() - (apporachCircleSize / 2) + 120, (int) circle.getPosY() - (apporachCircleSize / 2) + 120, apporachCircleSize, apporachCircleSize, this);
+                g.drawImage(approachCircleImage, (int) circle.getPosX() - (approachCircleSize / 2) + 120, (int) circle.getPosY() - (approachCircleSize / 2) + 120, approachCircleSize, approachCircleSize, this);
 
                 g.drawImage(hitCircleOverlayImage, (int) circle.getPosX() - 10, (int) circle.getPosY() - 10, this);
 
@@ -401,6 +444,59 @@ public class GameField extends JPanel {
         drawElements(g,String.valueOf(score),1860,5,true,false);
     }
 
+    public void drawMisses(Graphics g){
+
+        if(hitObjects.size() <= 0)
+            return;
+
+        for(int i = hitObjects.size() - 1; i >= 0; i--) {
+
+            HitObjects hitObjects1 = hitObjects.get(i);
+
+            switch (hitObjects1.getType()) {
+                case 0 ->
+                        g.drawImage(missImages[hitObjects1.getFrame()], hitObjects1.getPosition().x, hitObjects1.getPosition().y, this);
+                case 1 ->
+                        g.drawImage(hundredImages[hitObjects1.getFrame()], hitObjects1.getPosition().x, hitObjects1.getPosition().y, this);
+                case 2 ->
+                        g.drawImage(fiftyImages[hitObjects1.getFrame()], hitObjects1.getPosition().x, hitObjects1.getPosition().y, this);
+            }
+
+            if(hitObjects1.getFrame() + 1 > 44){
+                hitObjects.remove(i);
+                return;
+            }
+
+            hitObjects1.setFrame(hitObjects1.getFrame() + 1);
+        }
+    }
+
+    public void drawPauseMenu(Graphics g){
+
+        if(!isPaused) return;
+
+        //Pause Overlay
+        g.drawImage(pauseOverlayImage, 475, -100, this);
+
+
+        //Pause Buttons
+        g.drawImage(pauseContinueImage, 810, 360, this);
+
+        g.drawImage(pauseBackImage, 810, 550, this);
+
+        Rectangle imageBounds = new Rectangle(810,360,340, 110);
+        if (imageBounds.contains(mousePosition)){
+            if(mousePressed)
+                pauseGame();
+        }
+
+        Rectangle imageBounds2 = new Rectangle(810,550,340, 110);
+        if (imageBounds2.contains(mousePosition)){
+            if(mousePressed)
+                endGame();
+        }
+
+    }
     private void doDrawing(Graphics g) {
 
 
@@ -409,6 +505,8 @@ public class GameField extends JPanel {
         }
         else {
             drawCircles(g);
+            drawMisses(g);
+            drawPauseMenu(g);
         }
 
         if(mousePosition == null) return;
