@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="724e1b0c-520e-42e0-90f1-17d2959b91bf" name="Changes" comment="remade gitignore&#10;moved Sound Methode">
+    <list default="true" id="724e1b0c-520e-42e0-90f1-17d2959b91bf" name="Changes" comment="fixed spacing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OsuClient/Beatmap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OsuClient/Beatmap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OsuClient/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OsuClient/GameField.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +100,7 @@
       <workItem from="1656252250986" duration="6323000" />
       <workItem from="1656775981316" duration="30218000" />
       <workItem from="1656840655091" duration="11247000" />
-      <workItem from="1656852032407" duration="2545000" />
+      <workItem from="1656852032407" duration="3306000" />
     </task>
     <task id="LOCAL-00001" summary="fixed missing library">
       <created>1649090238724</created>
@@ -243,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656853701175</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fixed spacing">
+      <created>1656854770113</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1656854770113</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -291,7 +297,8 @@
     <MESSAGE value="added pseudo restart Game" />
     <MESSAGE value="remade gitignore" />
     <MESSAGE value="remade gitignore&#10;moved Sound Methode" />
-    <option name="LAST_COMMIT_MESSAGE" value="remade gitignore&#10;moved Sound Methode" />
+    <MESSAGE value="fixed spacing" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed spacing" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

@@ -33,6 +33,7 @@ public class GameField extends JPanel {
     private boolean buttonOne;
     private boolean buttonTwo;
     private Image[] numberImages;
+    private Clip musicClip;
 
     private int combo;
 
@@ -57,6 +58,8 @@ public class GameField extends JPanel {
 
         addKeyBinding(this, KeyEvent.VK_D, "2Button", (evt)-> buttonTwo = true);
 
+        addKeyBinding(this, KeyEvent.VK_ESCAPE, "3Button", (evt)-> endGame());
+
         combo = 0;
         timeCounter = 180;
         drawObject = new LinkedList();
@@ -64,7 +67,7 @@ public class GameField extends JPanel {
         currentBeatmap = beatmap;
 
         //start test song
-        playSound(getSongsPath()+ '/' +  mapName + "/song.wav");
+        playMusic(getSongsPath()+ '/' +  mapName + "/song.wav");
 
         startGameTick();
     }
@@ -94,17 +97,23 @@ public class GameField extends JPanel {
         doDrawing(g);
     }
 
+    public void endGame(){
+
+        musicClip.stop();
+
+        JFrame parent = (JFrame) this.getTopLevelAncestor();
+        parent.dispose();
+
+        new OsuClient();
+    }
+
     public void manageCircles(){
 
         mousePosition = MouseInfo.getPointerInfo().getLocation();
 
         //Todo add reset function and score list
         if(currentBeatmap._hitobjects.length <= lastGameObject) {
-
-            JFrame parent = (JFrame) this.getTopLevelAncestor();
-            parent.dispose();
-
-            new OsuClient();
+            endGame();
         }
 
         if (currentBeatmap._hitobjects[lastGameObject].getTiming() - 300 <= timeCounter) {
@@ -215,6 +224,29 @@ public class GameField extends JPanel {
                 clip.open(audioInput);
                 //Start the Clip
                 clip.start();
+            }
+            else{
+                System.out.println("[ERROR] Can´t find file");
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    public void playMusic(String musicLocation) {
+
+        try{
+            //Get File location
+            File musicPath = new File(musicLocation);
+            if(musicPath.exists())
+            {
+                //Get AudioInputStream and make a Clip out of it
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                musicClip = AudioSystem.getClip();
+                musicClip.open(audioInput);
+                //Start the Clip
+                musicClip.start();
             }
             else{
                 System.out.println("[ERROR] Can´t find file");
