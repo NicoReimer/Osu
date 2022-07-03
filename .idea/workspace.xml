@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="724e1b0c-520e-42e0-90f1-17d2959b91bf" name="Changes" comment="fixed spacing">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OsuClient/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OsuClient/GameField.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="27LCYPaMtKSzqZoQVrAk0jet7n0" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/rschu/Desktop/Schule/CT/GruppenProjekt/Ballon&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\rschu\Desktop\Schule\CT\GruppenProjekt\Osu\sounds" />
+      <recent name="C:\Users\rschu\Desktop\Schule\CT\GruppenProjekt\Osu\src" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="osu!" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="OsuClient.Program" />
+      <module name="Osu" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="724e1b0c-520e-42e0-90f1-17d2959b91bf" name="Changes" comment="" />
+      <created>1649090027730</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1649090027730</updated>
+      <workItem from="1649090031127" duration="3035000" />
+      <workItem from="1649587962454" duration="7585000" />
+      <workItem from="1649775500074" duration="534000" />
+      <workItem from="1653850438387" duration="1769000" />
+      <workItem from="1655389452661" duration="2574000" />
+      <workItem from="1655748638439" duration="199000" />
+      <workItem from="1655748900707" duration="6277000" />
+      <workItem from="1655756753398" duration="709000" />
+      <workItem from="1655757681906" duration="1007000" />
+      <workItem from="1655832577016" duration="119000" />
+      <workItem from="1656252250986" duration="6323000" />
+      <workItem from="1656775981316" duration="30218000" />
+      <workItem from="1656840655091" duration="11247000" />
+      <workItem from="1656852032407" duration="3306000" />
+    </task>
+    <task id="LOCAL-00001" summary="fixed missing library">
+      <created>1649090238724</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1649090238724</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added Sounds">
+      <created>1649091921552</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1649091921552</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added stuff">
+      <created>1655748701612</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1655748701612</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added stuff">
+      <created>1655748741340</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1655748741340</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added Beatmap Scanner">
+      <created>1655755379875</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1655755379875</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added Todo Bug">
+      <created>1655755465931</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1655755465931</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added Todo Bug">
+      <created>1656254265177</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1656254265177</updated>
+    </task>
+    <task id="LOCAL-00008" summary="small code refactoring">
+      <created>1656254768225</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1656254768225</updated>
+    </task>
+    <task id="LOCAL-00009" summary="small code refactoring">
+      <created>1656257537184</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1656257537184</updated>
+    </task>
+    <task id="LOCAL-00010" summary="-added circle renderer&#10;-added key listener&#10;-added more hitsounds&#10;-added gamefield&#10;&#10;-fixed minor bugs">
+      <created>1656799939893</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1656799939893</updated>
+    </task>
+    <task id="LOCAL-00011" summary="-small bug fix">
+      <created>1656800485746</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1656800485746</updated>
+    </task>
+    <task id="LOCAL-00012" summary="-added Combo and Combo Images">
+      <created>1656812965378</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1656812965378</updated>
+    </task>
+    <task id="LOCAL-00013" summary="-Added Comments">
+      <created>1656847080153</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1656847080153</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Whitespace">
+      <created>1656847139081</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1656847139081</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Freeze Bug Fix">
+      <created>1656847737860</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1656847737860</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added new Song">
+      <created>1656850099484</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1656850099484</updated>
+    </task>
+    <task id="LOCAL-00017" summary="new gitIgnore">
+      <created>1656850673969</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1656850673969</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added pseudo restart Game">
+      <created>1656851688816</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1656851688816</updated>
+    </task>
+    <task id="LOCAL-00019" summary="remade gitignore">
+      <created>1656852062165</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1656852062165</updated>
+    </task>
+    <task id="LOCAL-00020" summary="remade gitignore&#10;moved Sound Methode">
+      <created>1656853701175</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1656853701175</updated>
+    </task>
+    <task id="LOCAL-00021" summary="fixed spacing">
+      <created>1656854770113</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1656854770113</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="circle" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="fixed missing library" />
+    <MESSAGE value="added Sounds" />
+    <MESSAGE value="added stuff" />
+    <MESSAGE value="added Beatmap Scanner" />
+    <MESSAGE value="added Todo Bug" />
+    <MESSAGE value="small code refactoring" />
+    <MESSAGE value="-added circle renderer&#10;-added key listener&#10;-added more hitsounds&#10;-added gamefield&#10;&#10;-fixed minor bugs" />
+    <MESSAGE value="-small bug fix" />
+    <MESSAGE value="-added Combo and Combo Images" />
+    <MESSAGE value="-Added Comments" />
+    <MESSAGE value="Whitespace" />
+    <MESSAGE value="Freeze Bug Fix" />
+    <MESSAGE value="Added new Song" />
+    <MESSAGE value="new gitIgnore" />
+    <MESSAGE value="added pseudo restart Game" />
+    <MESSAGE value="remade gitignore" />
+    <MESSAGE value="remade gitignore&#10;moved Sound Methode" />
+    <MESSAGE value="fixed spacing" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed spacing" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.awt.event.ActionEvent" memberName="source" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="drawObject" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Osu$osu_.ic" NAME="osu! Coverage Results" MODIFIED="1656782922722" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

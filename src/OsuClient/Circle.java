@@ -1,31 +1,40 @@
 package OsuClient;
 
-import javax.swing.*;
-import java.awt.*;
-
 public class Circle {
 
     //variables
-    private double x, y, timing, hitsound;
+    private int x, y, hitsound;
+    private double timing;
     private boolean hit;
-    private Image image;
+    private float xOffset;
+    private float yOffset;
+    private float xMultiplier;
+    private float yMultiplier;
 
-    Circle(double pX, double pY, double pTiming, double pHitsound){
+    //constructor
+    Circle(int pX, int pY, double pTiming, int pHitsound){
 
-        this.x = pX;
-        this.y = pY;
+        setOffsets();
+
+        this.x = (int) (pX * xMultiplier + xOffset);
+        this.y = (int) (pY * yMultiplier + yOffset);
         this.timing = pTiming;
         this.hitsound = pHitsound;
 
         this.hit = false;
+    }
 
-        //get and set Image
-        var ii = new ImageIcon("skin/hitcircle.png");
-        this.image = ii.getImage();
+    public void setOffsets(){
+        int swidth = 1920;
+        int sheight = 1080;
+        swidth = sheight * 4 / 3;
+        xMultiplier = swidth / 640f;
+        yMultiplier = sheight / 480f;
+        xOffset = (int) (1920 - 512 * xMultiplier) / 2;
+        yOffset = (int) (1080 - 384 * yMultiplier) / 2;
     }
 
     //methods
-
     public double getTiming(){
         return this.timing;
     }
@@ -38,7 +47,7 @@ public class Circle {
         return this.x;
     }
 
-    public void setPosX(float p_x){
+    public void setPosX(int p_x){
         this.x = p_x;
     }
 
@@ -46,7 +55,7 @@ public class Circle {
         return this.y;
     }
 
-    public void setPosY(float p_y){
+    public void setPosY(int p_y){
         this.y = p_y;
     }
 
@@ -58,7 +67,8 @@ public class Circle {
         this.hit = p_hit;
     }
 
-    public Image getImage() {
-        return this.image;
-    }
+    public int getHitsound() { return this.hitsound;}
+
+    public void setHitsound (int p_hitsound){ this.hitsound = p_hitsound;}
+
 }
