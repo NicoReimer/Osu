@@ -134,6 +134,26 @@ public class GameField extends JPanel {
                 }
             }
         }
+
+        //remove outdated or hit circles
+        for(int i = drawObject.size() - 1; i >= 0; i--){
+
+            Circle circle = (Circle)drawObject.get(i);
+
+            if(circle.getHit()) {
+                drawObject.remove(i);
+                combo++;
+            }
+            else if(timeCounter - circle.getTiming() > 300)
+            {
+                if(combo > 5)
+                    OsuClient.playSound(path_skin + "/combobreak.wav");
+
+                combo = 0;
+                drawObject.remove(i);
+            }
+        }
+
     }
 
     //Draw Circles
@@ -154,25 +174,6 @@ public class GameField extends JPanel {
             g.drawImage(hitCircleOverlayImage, (int) circle.getPosX() - 10, (int) circle.getPosY() - 10, this);
 
             g.drawImage(hitCircleImage, (int) circle.getPosX(), (int) circle.getPosY(), this);
-        }
-
-        //remove outdated or hit circles
-        for(int i = drawObject.size() - 1; i >= 0; i--){
-
-            Circle circle = (Circle)drawObject.get(i);
-
-            if(circle.getHit()) {
-                drawObject.remove(i);
-                combo++;
-            }
-            else if(timeCounter - circle.getTiming() > 300)
-            {
-                if(combo > 5)
-                 OsuClient.playSound(path_skin + "/combobreak.wav");
-
-                combo = 0;
-                drawObject.remove(i);
-            }
         }
 
         //Todo: simplify Combo Draw
