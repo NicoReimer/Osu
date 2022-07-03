@@ -19,15 +19,15 @@ public class OsuClient extends JFrame {
     private JPanel pnlBeatmaps;
     private JList ltBeatmaps;
     private Beatmap currentBeatmap;
-    private GameField gameField = new GameField();
+    private final GameField gameField = new GameField();
     private final CardLayout pnlLayout;
     private static final String path_songs = "res\\songs";
     static String path_skin = "res\\skin";
 
     public OsuClient() {
-        //ImageIcon icon = new ImageIcon("src/Chatogram/Client/img/ChatogramIcon.png");
-        //this.setIconImage(icon.getImage());
-        //playSound("sounds/background.wav");
+        //Set Icon
+        ImageIcon icon = new ImageIcon("res\\osuicon.png");
+        this.setIconImage(icon.getImage());
 
         //Init Menu
         this.setContentPane(this.pnlMain);
@@ -41,6 +41,7 @@ public class OsuClient extends JFrame {
         this.setUndecorated(true);
         this.setVisible(true);
 
+        //Create Layout
         pnlLayout = (CardLayout)pnlMain.getLayout();
 
         //Buttons
@@ -49,8 +50,10 @@ public class OsuClient extends JFrame {
             loadBeatmaps();
         });
 
+        //Add Exit Button
         btnQuit.addActionListener(e -> System.exit(0));
 
+        //Add Beatmap List
         ltBeatmaps.addListSelectionListener(e -> {
 
             if(e.getValueIsAdjusting()) {
@@ -108,7 +111,6 @@ public class OsuClient extends JFrame {
 
         ltBeatmaps.setModel(model);
     }
-    //plays sound files only wav
 
     public static String getSongsPath()
     {

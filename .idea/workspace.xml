@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="724e1b0c-520e-42e0-90f1-17d2959b91bf" name="Changes" comment="fixed spacing">
+    <list default="true" id="724e1b0c-520e-42e0-90f1-17d2959b91bf" name="Changes" comment="added icon">
+      <change afterPath="$PROJECT_DIR$/res/osuicon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OsuClient/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OsuClient/GameField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OsuClient/OsuClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OsuClient/OsuClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,14 +57,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/rschu/Desktop/Schule/CT/GruppenProjekt/Ballon&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/rschu/Desktop/Schule/CT/GruppenProjekt/Ballon",
+    "run.code.analysis.last.selected.profile": "pProject Default"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\rschu\Desktop\Schule\CT\GruppenProjekt\Osu\sounds" />
@@ -298,7 +300,8 @@
     <MESSAGE value="remade gitignore" />
     <MESSAGE value="remade gitignore&#10;moved Sound Methode" />
     <MESSAGE value="fixed spacing" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed spacing" />
+    <MESSAGE value="added icon" />
+    <option name="LAST_COMMIT_MESSAGE" value="added icon" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
