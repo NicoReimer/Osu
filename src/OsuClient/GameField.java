@@ -97,9 +97,11 @@ public class GameField extends JPanel {
 
         //Todo add reset function and score list
         if(currentBeatmap._hitobjects.length <= lastGameObject) {
-            JFrame test = new OsuClient();
-            test.setVisible(true);
-            test.dispose();
+
+            JFrame parent = (JFrame) this.getTopLevelAncestor();
+            parent.dispose();
+
+            new OsuClient();
         }
 
         if (currentBeatmap._hitobjects[lastGameObject].getTiming() - 300 <= timeCounter) {
