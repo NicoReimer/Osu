@@ -99,8 +99,6 @@ public class GameField extends JPanel {
         //Todo add reset function and score list
         if(currentBeatmap._hitobjects.length <= lastGameObject) {
 
-
-
         }
 
         if (currentBeatmap._hitobjects[lastGameObject].getTiming() - 300 <= timeCounter) {
