@@ -83,7 +83,7 @@ public class GameField extends JPanel {
         Runnable gameTick = () -> doGameCycle();
 
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(gameTick, 0, 1, TimeUnit.NANOSECONDS);
+        executor.scheduleAtFixedRate(gameTick, 0, 1, TimeUnit.MILLISECONDS);
     }
 
     //RePaint Components
@@ -112,7 +112,7 @@ public class GameField extends JPanel {
             lastGameObject++;
         }
 
-       for (int i = 0; i < drawObject.size(); i++) {
+        for (int i = 0; i < drawObject.size(); i++) {
 
             Circle circle = (Circle)drawObject.get(i);
 
@@ -141,7 +141,6 @@ public class GameField extends JPanel {
             }
         }
 
-        //remove outdated or hit circles
         for(int i = drawObject.size() - 1; i >= 0; i--){
 
             Circle circle = (Circle)drawObject.get(i);
@@ -159,7 +158,6 @@ public class GameField extends JPanel {
                 drawObject.remove(i);
             }
         }
-
     }
 
     //Draw Circles
@@ -184,21 +182,15 @@ public class GameField extends JPanel {
 
         //Todo: simplify Combo Draw
         if(combo < 10) {
-            g.drawImage(numberImages[combo], 120, 975, this);
-            g.drawImage(numberImages[10], 160, 975, this);
+            g.drawImage(numberImages[combo], 120, 975, this); //Zahl 1
+            g.drawImage(numberImages[10], 160, 975, this); // X
         }
-        else if(combo > 9 && combo < 99){
-            g.drawImage(numberImages[combo / 10], 120, 975, this);
-            g.drawImage(numberImages[combo % 10], 160, 975, this);
-            g.drawImage(numberImages[10], 200, 975, this);
+        else if(combo > 9 && combo < 100){
+            g.drawImage(numberImages[combo / 10], 120, 975, this); //Zahl 1
+            g.drawImage(numberImages[combo % 10], 160, 975, this); //Zahl 2
+            g.drawImage(numberImages[10], 200, 975, this); // X
         }
-        else if (combo < 101 && combo > 99){
-            g.drawImage(numberImages[1], 120, 975, this);
-            g.drawImage(numberImages[0], 160, 975, this);
-            g.drawImage(numberImages[0], 200, 975, this);
-            g.drawImage(numberImages[10], 240, 975, this);
-        }
-        else if (combo > 100 && combo < 999){
+        else if (combo > 99 && combo < 999){
             g.drawImage(numberImages[combo / 100], 120, 975, this);
             g.drawImage(numberImages[(combo / 10) % 10], 160, 975, this);
             g.drawImage(numberImages[combo % 10], 200, 975, this);
