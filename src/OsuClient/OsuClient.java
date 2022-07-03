@@ -2,21 +2,15 @@ package OsuClient;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 
 public class OsuClient extends JFrame {
-    private JPanel pnlMain;
+
+    public  JPanel pnlMain;
     private JPanel pnlMenu;
     private JPanel pnlGameField;
     private JButton btnQuit;
@@ -26,7 +20,7 @@ public class OsuClient extends JFrame {
     private JList ltBeatmaps;
     private Beatmap currentBeatmap;
     private GameField gameField = new GameField();
-    private CardLayout pnlLayout;
+    private final CardLayout pnlLayout;
     private static final String path_songs = "res\\songs";
     static String path_skin = "res\\skin";
 
@@ -49,13 +43,6 @@ public class OsuClient extends JFrame {
 
         pnlLayout = (CardLayout)pnlMain.getLayout();
 
-        //Set Cursor
-        /*setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-                new ImageIcon(path_skin + "/cursor.png").getImage(),
-                new Point(0,0),"custom cursor"));*/
-
-        //Todo: rework cursor function
-
         //Buttons
         btnPlay.addActionListener(e -> {
             pnlLayout.show(pnlMain,"cardBeatmaps");
@@ -71,28 +58,37 @@ public class OsuClient extends JFrame {
                 //select Beatmap
                 String selectedValue = (String) ltBeatmaps.getSelectedValue();
 
+                //select GameField Layout
                 pnlLayout.show(pnlMain, "cardPlayField");
 
                 //create Beatmap
                 currentBeatmap = new Beatmap(getSongsPath() + '/' + selectedValue, "/play.csv");
 
+                //set background Color
                 gameField.setBackground(Color.black);
 
+                //add GameField to JFrame
                 setContentPane(gameField);
 
-                //Transparent 16 x 16 pixel cursor image.
-                BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+                //remove Cursor
+                removeCursor();
 
-                //Create a new blank cursor.
-                Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
-                        cursorImg, new Point(0, 0), "blank cursor");
-
-                //Set the blank cursor to the JFrame.
-                getContentPane().setCursor(blankCursor);
-
-                gameField.startGame(currentBeatmap,selectedValue);
+                //star the Game
+                gameField.startGame(currentBeatmap, selectedValue);
             }
         });
+    }
+
+    public void removeCursor(){
+        //Transparent 16 x 16 pixel cursor image.
+        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+
+        //Create a new blank cursor.
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+                cursorImg, new Point(0, 0), "blank cursor");
+
+        //Set the blank cursor to the JFrame.
+        getContentPane().setCursor(blankCursor);
     }
 
     public void loadBeatmaps(){
@@ -112,7 +108,6 @@ public class OsuClient extends JFrame {
 
         ltBeatmaps.setModel(model);
     }
-
     //plays sound files only wav
     public static void playSound(String musicLocation) {
 
