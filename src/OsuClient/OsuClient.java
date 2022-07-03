@@ -109,28 +109,6 @@ public class OsuClient extends JFrame {
         ltBeatmaps.setModel(model);
     }
     //plays sound files only wav
-    public static void playSound(String musicLocation) {
-
-        try{
-            //Get File location
-            File musicPath = new File(musicLocation);
-            if(musicPath.exists())
-            {
-                //Get AudioInputStream and make a Clip out of it
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioInput);
-                //Start the Clip
-                clip.start();
-            }
-            else{
-                System.out.println("[ERROR] Can´t find file");
-            }
-        }
-        catch(Exception ex){
-            ex.printStackTrace();
-        }
-    }
 
     public static String getSongsPath()
     {

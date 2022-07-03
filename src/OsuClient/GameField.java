@@ -1,6 +1,9 @@
 package OsuClient;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -61,7 +64,7 @@ public class GameField extends JPanel {
         currentBeatmap = beatmap;
 
         //start test song
-        OsuClient.playSound(getSongsPath()+ '/' +  mapName + "/song.wav");
+        playSound(getSongsPath()+ '/' +  mapName + "/song.wav");
 
         startGameTick();
     }
@@ -125,11 +128,11 @@ public class GameField extends JPanel {
 
                     //Play Sound
                     switch (circle.getHitsound()) {
-                        case 0 -> OsuClient.playSound(path_skin + "/drum-hitnormal.wav");
-                        case 1 -> OsuClient.playSound(path_skin + "/drum-hitwhistle.wav");
-                        case 2 -> OsuClient.playSound(path_skin + "/drum-hitfinish.wav");
-                        case 3 -> OsuClient.playSound(path_skin + "/drum-hitclap.wav");
-                        default -> OsuClient.playSound(path_skin + "/drum-hitnormal.wav");
+                        case 0 -> playSound(path_skin + "/drum-hitnormal.wav");
+                        case 1 -> playSound(path_skin + "/drum-hitwhistle.wav");
+                        case 2 -> playSound(path_skin + "/drum-hitfinish.wav");
+                        case 3 -> playSound(path_skin + "/drum-hitclap.wav");
+                        default -> playSound(path_skin + "/drum-hitnormal.wav");
                     }
 
                     buttonOne = false;
@@ -150,7 +153,7 @@ public class GameField extends JPanel {
             else if(timeCounter - circle.getTiming() > 300)
             {
                 if(combo > 5)
-                    OsuClient.playSound(path_skin + "/combobreak.wav");
+                    playSound(path_skin + "/combobreak.wav");
 
                 combo = 0;
                 drawObject.remove(i);
@@ -205,6 +208,29 @@ public class GameField extends JPanel {
         if(mousePosition == null) return;
 
         g.drawImage(cursorImage, mousePosition.x - 128, mousePosition.y- 128,this);
+    }
+
+    public void playSound(String musicLocation) {
+
+        try{
+            //Get File location
+            File musicPath = new File(musicLocation);
+            if(musicPath.exists())
+            {
+                //Get AudioInputStream and make a Clip out of it
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                //Start the Clip
+                clip.start();
+            }
+            else{
+                System.out.println("[ERROR] Can´t find file");
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     public static void addKeyBinding(JComponent comp, int keyCode, String id, ActionListener actionListener){
