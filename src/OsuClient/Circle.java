@@ -6,7 +6,6 @@ public class Circle {
     private int x, y, hitsound;
     private double timing;
     private boolean hit;
-
     private float xOffset;
     private float yOffset;
     private float xMultiplier;

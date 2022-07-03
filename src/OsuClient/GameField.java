@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -81,7 +80,7 @@ public class GameField extends JPanel {
         Runnable gameTick = () -> doGameCycle();
 
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(gameTick, 0, 1, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(gameTick, 0, 1, TimeUnit.NANOSECONDS);
     }
 
     //RePaint Components
@@ -98,7 +97,9 @@ public class GameField extends JPanel {
 
         //Todo add reset function and score list
         if(currentBeatmap._hitobjects.length <= lastGameObject) {
-
+            JFrame test = new OsuClient();
+            test.setVisible(true);
+            test.dispose();
         }
 
         if (currentBeatmap._hitobjects[lastGameObject].getTiming() - 300 <= timeCounter) {
