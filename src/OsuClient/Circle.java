@@ -70,5 +70,4 @@ public class Circle {
     public int getHitsound() { return this.hitsound;}
 
     public void setHitsound (int p_hitsound){ this.hitsound = p_hitsound;}
-
 }

@@ -2,24 +2,25 @@ package OsuClient;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
+
 
 public class OsuClient extends JFrame {
 
-    public  JPanel pnlMain;
-    private JPanel pnlMenu;
-    private JPanel pnlGameField;
-    private JButton btnQuit;
-    private JButton btnPlay;
-    private JLabel lblOsu;
-    private JPanel pnlBeatmaps;
-    private JList ltBeatmaps;
+    public int panelType;
+    public  JPanel cards;
     private Beatmap currentBeatmap;
+    private final BeatmapMenu beatmapMenu = new BeatmapMenu();
     private final GameField gameField = new GameField();
-    private final CardLayout pnlLayout;
+    private final MainMenu mainMenu = new MainMenu();
     private static final String path_songs = "res\\songs";
     static String path_skin = "res\\skin";
+    final static String MAINMENU = "Card with JButtons";
+    final static String BEATMAPMENU = "Card with JTextField";
+    final static String GAMEFIELD = "Card with GameField";
+
 
     public OsuClient() {
         //Set Icon
@@ -27,7 +28,9 @@ public class OsuClient extends JFrame {
         this.setIconImage(icon.getImage());
 
         //Init Menu
-        this.setContentPane(this.pnlMain);
+        cards = new JPanel(new CardLayout());
+
+        this.setContentPane(this.cards);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
@@ -38,43 +41,84 @@ public class OsuClient extends JFrame {
         this.setUndecorated(true);
         this.setVisible(true);
 
-        //Create Layout
-        pnlLayout = (CardLayout)pnlMain.getLayout();
+        panelType = 0;
+        cards.add(mainMenu, MAINMENU);
+        cards.add(beatmapMenu, BEATMAPMENU);
+        cards.add(gameField, GAMEFIELD);
 
-        //Buttons
-        btnPlay.addActionListener(e -> {
-            pnlLayout.show(pnlMain,"cardBeatmaps");
-            loadBeatmaps();
-        });
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, MAINMENU);
 
-        //Add Exit Button
-        btnQuit.addActionListener(e -> System.exit(0));
+        mainMenu.LoadMenu();
 
-        //Add Beatmap List
-        ltBeatmaps.addListSelectionListener(e -> {
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
 
-            if(e.getValueIsAdjusting()) {
+                if (panelType == 0) {
 
-                //select Beatmap
-                String selectedValue = (String) ltBeatmaps.getSelectedValue();
+                    Rectangle imageBounds = new Rectangle(770, 347, 368, 127);
 
-                //select GameField Layout
-                pnlLayout.show(pnlMain, "cardPlayField");
+                    if (imageBounds.contains(MouseInfo.getPointerInfo().getLocation())) {
+                        cl.show(cards, BEATMAPMENU);
+                        beatmapMenu.LoadMenu();
+                        panelType = 1;
+                    }
 
-                //create Beatmap
-                currentBeatmap = new Beatmap(getSongsPath() + '/' + selectedValue, "/play.csv");
+                    Rectangle imageBounds2 = new Rectangle(793, 561, 339, 106);
 
-                //set background Color
-                gameField.setBackground(Color.black);
+                    if (imageBounds2.contains(MouseInfo.getPointerInfo().getLocation())) {
+                        System.exit(0);
 
-                //add GameField to JFrame
-                setContentPane(gameField);
+                    }
+                }
+                else if(panelType == 1){
 
-                //remove Cursor
-                removeCursor();
+                    Rectangle imageBounds = new Rectangle(1101, 190, 762, 168);
 
-                //star the Game
-                gameField.startGame(currentBeatmap, selectedValue);
+                    if (imageBounds.contains(MouseInfo.getPointerInfo().getLocation())) {
+
+                        currentBeatmap = new Beatmap(getSongsPath() + '/' + "140662 cYsmix feat. Emmy - Tear Rain", "/play.csv");
+
+                        //set background Color
+                        gameField.setBackground(Color.black);
+
+                        //remove Cursor
+                        removeCursor();
+
+                        cl.show(cards, GAMEFIELD);
+
+                        //star the Game
+                        gameField.startGame(currentBeatmap, "140662 cYsmix feat. Emmy - Tear Rain");
+
+                        panelType = 2;
+                    }
+
+                    Rectangle imageBounds2 = new Rectangle(1112, 413, 751, 161);
+
+                    if (imageBounds2.contains(MouseInfo.getPointerInfo().getLocation())) {
+
+                        currentBeatmap = new Beatmap(getSongsPath() + '/' + "89912 Stan SB - Let This Go", "/play.csv");
+
+                        //set background Color
+                        gameField.setBackground(Color.black);
+
+                        //remove Cursor
+                        removeCursor();
+
+                        cl.show(cards, GAMEFIELD);
+
+                        panelType = 2;
+
+                        //star the Game
+                        gameField.startGame(currentBeatmap, "89912 Stan SB - Let This Go");
+
+                    }
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
             }
         });
     }
@@ -89,24 +133,6 @@ public class OsuClient extends JFrame {
 
         //Set the blank cursor to the JFrame.
         getContentPane().setCursor(blankCursor);
-    }
-
-    public void loadBeatmaps(){
-        DefaultListModel<String> model = new DefaultListModel<>();
-
-        //Creating a File object for directory
-        File directoryPath = new File(getSongsPath());
-        //List of all files and directories
-        String[] contents = directoryPath.list();
-
-        if (contents != null) {
-            for (String content : contents) {
-                System.out.println(content);
-                model.addElement(content);
-            }
-        }
-
-        ltBeatmaps.setModel(model);
     }
 
     public static String getSongsPath()

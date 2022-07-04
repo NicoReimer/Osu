@@ -172,7 +172,7 @@ public class GameField extends JPanel {
         long end = System.currentTimeMillis();
 
         //Calculate the time to load the Song and use it as offset
-        timeCounter = (end - start) + 60;
+        timeCounter = (end - start) * 2.25;
 
         //Start Game Cycle
         startGameTick();
